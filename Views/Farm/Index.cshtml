@@ -1,0 +1,318 @@
+﻿
+@model IEnumerable<Agristream.Models.Farm>
+
+@{
+    ViewData["Title"] = "Farm Management";
+}
+
+<div class="container-fluid py-4">
+
+    <!-- Page Heading -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold text-success mb-1">
+                <i class="bi bi-house-door"></i> Farm Management
+            </h2>
+
+            <p class="text-muted mb-0">
+                Register, monitor and manage agricultural farms.
+            </p>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2 mt-3 mt-md-0">
+
+            <!-- Back to Admin Dashboard -->
+            <a href="@Url.Action("Index", "Admin")"
+               class="btn btn-outline-success">
+                <i class="bi bi-arrow-left-circle"></i>
+                Back to Admin Dashboard
+            </a>
+
+            <!-- Register New Farm -->
+            <a href="@Url.Action("Create", "Farm")"
+               class="btn btn-success">
+                <i class="bi bi-plus-circle"></i>
+                Register New Farm
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Success Message -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            <i class="bi bi-check-circle-fill"></i>
+            @TempData["SuccessMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert">
+            </button>
+        </div>
+    }
+
+    <!-- Farm Statistics -->
+    <div class="row g-3 mb-4">
+
+        <!-- Total Farms -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1">
+                                Total Registered Farms
+                            </p>
+
+                            <h3 class="fw-bold text-success mb-0">
+                                @Model.Count()
+                            </h3>
+                        </div>
+
+                        <div class="bg-success-subtle text-success rounded-3 p-3">
+                            <i class="bi bi-house-door fs-3"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Farms -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1">
+                                Active Farms
+                            </p>
+
+                            <h3 class="fw-bold text-primary mb-0">
+                                @Model.Count(f => f.IsActive)
+                            </h3>
+                        </div>
+
+                        <div class="bg-primary-subtle text-primary rounded-3 p-3">
+                            <i class="bi bi-check-circle fs-3"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Inactive Farms -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-1">
+                                Inactive Farms
+                            </p>
+
+                            <h3 class="fw-bold text-secondary mb-0">
+                                @Model.Count(f => !f.IsActive)
+                            </h3>
+                        </div>
+
+                        <div class="bg-secondary-subtle text-secondary rounded-3 p-3">
+                            <i class="bi bi-pause-circle fs-3"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Farms Table -->
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-header bg-white border-0 py-3 px-4">
+
+            <h5 class="fw-bold mb-1">
+                <i class="bi bi-list-ul text-success"></i>
+                Registered Farms
+            </h5>
+
+            <p class="text-muted small mb-0">
+                View and manage all registered agricultural farms.
+            </p>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            @if (Model.Any())
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>Farm ID</th>
+                                <th>Farm Name</th>
+                                <th>Location</th>
+                                <th>Size (Hectares)</th>
+                                <th>Status</th>
+                                <th>Date Registered</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var farm in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <span class="text-muted">
+                                            #@farm.FarmId
+                                        </span>
+                                    </td>
+
+                                    <td class="fw-semibold">
+                                        @farm.FarmName
+                                    </td>
+
+                                    <td>
+                                        <i class="bi bi-geo-alt text-muted"></i>
+                                        @farm.Location
+                                    </td>
+
+                                    <td>
+                                        @farm.SizeInHectares.ToString("N2")
+                                    </td>
+
+                                    <td>
+                                        @if (farm.IsActive)
+                                        {
+                                            <span class="badge bg-success-subtle text-success px-3 py-2">
+                                                <i class="bi bi-check-circle"></i>
+                                                Active
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary-subtle text-secondary px-3 py-2">
+                                                <i class="bi bi-pause-circle"></i>
+                                                Inactive
+                                            </span>
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @farm.CreatedAt.ToLocalTime().ToString("dd MMM yyyy")
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <div class="d-flex justify-content-center gap-2 flex-wrap">
+
+                                            <a href="@Url.Action("Details", "Farm", new { id = farm.FarmId })"
+                                               class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i>
+                                                View
+                                            </a>
+
+                                            <a href="@Url.Action("Edit", "Farm", new { id = farm.FarmId })"
+                                               class="btn btn-sm btn-outline-success">
+                                                <i class="bi bi-pencil"></i>
+                                                Edit
+                                            </a>
+
+                                            <a href="@Url.Action("Delete", "Farm", new { id = farm.FarmId })"
+                                               class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                                Delete
+                                            </a>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+
+                    <div class="bg-success-subtle text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                         style="width:80px;height:80px;">
+
+                        <i class="bi bi-house-add fs-1"></i>
+
+                    </div>
+
+                    <h5 class="fw-bold">
+                        No Farms Registered Yet
+                    </h5>
+
+                    <p class="text-muted">
+                        Start by registering your first agricultural farm.
+                    </p>
+
+                    <a href="@Url.Action("Create", "Farm")"
+                       class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i>
+                        Register First Farm
+                    </a>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+    <!-- System Information -->
+    <div class="card border-0 shadow-sm rounded-4 mt-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center gap-3">
+
+                <div class="bg-success-subtle text-success rounded-3 p-3">
+                    <i class="bi bi-cloud-check fs-3"></i>
+                </div>
+
+                <div>
+                    <h6 class="fw-bold mb-1">
+                        AgriStream IoT Platform
+                    </h6>
+
+                    <p class="text-muted small mb-0">
+                        Centralised agricultural farm administration
+                        and monitoring through AgriStream.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-muted small mt-3">
+        AgriStream IoT Platform | Farm Administration
+    </div>
+
+</div>

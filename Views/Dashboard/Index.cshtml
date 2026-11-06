@@ -1,0 +1,257 @@
+﻿
+@{
+    ViewData["Title"] = "Farmer Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+}
+
+<div class="container-fluid py-4">
+
+    <!-- Welcome Header -->
+    <div class="dashboard-header">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2>Welcome to AgriStream 🌱</h2>
+                <p class="mb-0">
+                    Monitor your farms, track environmental conditions
+                    and manage your agricultural activities.
+                </p>
+            </div>
+
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <span class="badge bg-light text-success p-2">
+                    Farmer Dashboard
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="metric-icon mb-3">🌾</div>
+                <p class="text-muted mb-1">Registered Farms</p>
+                <div class="metric-value">03</div>
+                <small class="text-success">Sample farm count</small>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="metric-icon mb-3">🌡️</div>
+                <p class="text-muted mb-1">Temperature</p>
+                <div class="metric-value">26°C</div>
+                <small class="text-success">Sample reading</small>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="metric-icon mb-3">💧</div>
+                <p class="text-muted mb-1">Soil Moisture</p>
+                <div class="metric-value">68%</div>
+                <small class="text-success">Sample reading</small>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-3">
+            <div class="dashboard-card">
+                <div class="metric-icon mb-3">📡</div>
+                <p class="text-muted mb-1">Connected Sensors</p>
+                <div class="metric-value">08</div>
+                <small class="text-success">Sample sensor count</small>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Monitoring -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-lg-8">
+            <div class="section-card">
+                <h5 class="dashboard-heading mb-3">
+                    Environmental Monitoring
+                </h5>
+
+                <p class="text-muted small">
+                    Overview of your farm's environmental conditions.
+                </p>
+
+                <div class="row g-3 mt-2">
+
+                    <div class="col-md-4">
+                        <div class="p-3 rounded bg-light">
+                            <div class="fs-3">🌡️</div>
+                            <h4 class="fw-bold mt-2">26°C</h4>
+                            <small class="text-muted">Temperature</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="p-3 rounded bg-light">
+                            <div class="fs-3">💨</div>
+                            <h4 class="fw-bold mt-2">55%</h4>
+                            <small class="text-muted">Humidity</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="p-3 rounded bg-light">
+                            <div class="fs-3">🌱</div>
+                            <h4 class="fw-bold mt-2">68%</h4>
+                            <small class="text-muted">Soil Moisture</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="alert alert-success mt-4 mb-0">
+                    <strong>Farm status:</strong>
+                    Conditions are within the sample monitoring range.
+                </div>
+            </div>
+        </div>
+
+        <!-- Sensor Status -->
+        <div class="col-lg-4">
+            <div class="section-card">
+                <h5 class="dashboard-heading mb-4">
+                    Sensor Status
+                </h5>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Temperature Sensor</span>
+                    <span class="status-online">● Online</span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Humidity Sensor</span>
+                    <span class="status-online">● Online</span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Soil Sensor</span>
+                    <span class="status-online">● Online</span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Water Sensor</span>
+                    <span class="text-danger fw-semibold">● Offline</span>
+                </div>
+
+                <hr />
+
+                <p class="text-muted small mb-0">
+                    Demonstration statuses. Live connectivity will
+                    be implemented later.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Recent Readings -->
+    <div class="row g-4">
+
+        <div class="col-lg-8">
+            <div class="section-card">
+                <h5 class="dashboard-heading mb-3">
+                    Recent Sensor Readings
+                </h5>
+
+                <div class="table-responsive">
+                    <table class="table table-hover dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Sensor</th>
+                                <th>Reading</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Temperature</td>
+                                <td>26°C</td>
+                                <td>North Farm</td>
+                                <td><span class="badge bg-success">Normal</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Humidity</td>
+                                <td>55%</td>
+                                <td>East Farm</td>
+                                <td><span class="badge bg-success">Normal</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Soil Moisture</td>
+                                <td>68%</td>
+                                <td>North Farm</td>
+                                <td><span class="badge bg-success">Normal</span></td>
+                            </tr>
+
+                            <tr>
+                                <td>Water Level</td>
+                                <td>20%</td>
+                                <td>South Farm</td>
+                                <td><span class="badge bg-warning text-dark">Low</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activities -->
+        <div class="col-lg-4">
+            <div class="section-card">
+                <h5 class="dashboard-heading mb-4">
+                    Recent Activities
+                </h5>
+
+                <div class="d-flex gap-3 mb-4">
+                    <div class="activity-icon">📡</div>
+                    <div>
+                        <strong>Sensor connected</strong>
+                        <p class="text-muted small mb-0">
+                            Temperature sensor registered.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3 mb-4">
+                    <div class="activity-icon">🌱</div>
+                    <div>
+                        <strong>Farm monitoring</strong>
+                        <p class="text-muted small mb-0">
+                            Environmental readings received.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3">
+                    <div class="activity-icon">💧</div>
+                    <div>
+                        <strong>Water alert</strong>
+                        <p class="text-muted small mb-0">
+                            Water level requires attention.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="text-center text-muted mt-5 small">
+        © 2026 AgriStream IoT | Smart Agricultural Monitoring
+    </footer>
+
+</div>

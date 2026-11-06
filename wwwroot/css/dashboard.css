@@ -1,0 +1,135 @@
+﻿
+/* =====================================
+   AGRISTREAM FARMER DASHBOARD
+===================================== */
+
+body {
+    background-color: #f4f7f2;
+    font-family: 'Segoe UI', sans-serif;
+    color: #26372b;
+}
+
+/* Welcome Header */
+
+.dashboard-header {
+    background: linear-gradient(120deg, #14532d, #23834a);
+    color: white;
+    padding: 32px;
+    border-radius: 16px;
+    margin-bottom: 28px;
+}
+
+    .dashboard-header h2 {
+        font-weight: 700;
+    }
+
+    .dashboard-header p {
+        opacity: 0.9;
+    }
+
+/* Dashboard Cards */
+
+.dashboard-card {
+    background: white;
+    border: none;
+    border-radius: 14px;
+    padding: 22px;
+    height: 100%;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .dashboard-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    }
+
+/* Metric Icons */
+
+.metric-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e8f5e9;
+    border-radius: 12px;
+    font-size: 24px;
+}
+
+/* Metric Values */
+
+.metric-value {
+    font-size: 30px;
+    font-weight: 700;
+    color: #183b25;
+}
+
+/* Section Cards */
+
+.section-card {
+    background: white;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
+    height: 100%;
+}
+
+.dashboard-heading {
+    color: #183b25;
+    font-weight: 700;
+}
+
+/* Sensor Status */
+
+.status-online {
+    color: #198754;
+    font-weight: 600;
+}
+
+/* Tables */
+
+.dashboard-table th {
+    color: #68756c;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.dashboard-table td {
+    vertical-align: middle;
+    padding: 15px 10px;
+}
+
+/* Activity */
+
+.activity-icon {
+    width: 38px;
+    height: 38px;
+    background: #e8f5e9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        padding: 22px;
+    }
+
+        .dashboard-header h2 {
+            font-size: 23px;
+        }
+
+    .metric-value {
+        font-size: 25px;
+    }
+
+    .section-card {
+        padding: 18px;
+    }
+}

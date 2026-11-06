@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Data/">
+    <File Path="ApplicationDbContext.cs" />
+  </Folder>
+  <Folder Name="/Services/">
+    <File Path="AdminSeeder.cs" />
+    <File Path="RoleSeeder.cs" />
+  </Folder>
+  <Project Path="Agristream.csproj" />
+</Solution>

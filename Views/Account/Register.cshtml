@@ -1,0 +1,338 @@
+﻿@model Agristream.Models.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register | AgriStream";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+
+    <div class="login-page">
+
+        <div class="login-container register-container">
+
+            <!-- LEFT SIDE: WELCOME SECTION -->
+            <div class="login-visual">
+
+                <div class="login-visual-overlay"></div>
+
+                <div class="login-brand">
+                    <img src="~/images/lo1.png"
+                         alt="AgriStream Logo" />
+
+                    <span>AgriStream</span>
+                </div>
+
+                <div class="login-visual-content">
+
+                    <span class="login-tag">
+                        SMART AGRICULTURE TECHNOLOGY
+                    </span>
+
+                    <h1>
+                        Start growing
+                        <span>smarter today.</span>
+                    </h1>
+
+                    <p>
+                        Create your AgriStream account and take
+                        control of your agricultural operations
+                        through intelligent monitoring and
+                        cloud-powered technology.
+                    </p>
+
+                    <div class="login-benefits">
+
+                        <div>
+                            <span>✓</span>
+                            Monitor your farm conditions
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            Access real-time sensor information
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            Experience intelligent farm management
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="login-visual-footer">
+                    <span>🌱</span>
+                    Growing a smarter agricultural future.
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE: REGISTRATION FORM -->
+            <div class="login-form-section">
+
+                <div class="login-form-wrapper">
+
+                    <!-- MOBILE BRAND -->
+                    <div class="login-mobile-brand">
+
+                        <img src="~/images/lo1.png"
+                             alt="AgriStream Logo" />
+
+                        <span>AgriStream</span>
+
+                    </div>
+
+                    <!-- HEADING -->
+                    <div class="login-heading">
+
+                        <span class="login-heading-label">
+                            CREATE YOUR ACCOUNT
+                        </span>
+
+                        <h2>Create Account</h2>
+
+                        <p>
+                            Join AgriStream and start monitoring
+                            your agricultural operations.
+                        </p>
+
+                    </div>
+
+                    <!-- REGISTER FORM -->
+                    <form asp-controller="Account"
+                          asp-action="Register"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger login-validation mb-3">
+                        </div>
+
+                        <!-- FULL NAME -->
+                        <div class="login-input-group">
+
+                            <label asp-for="FullName">
+                                Full Name
+                            </label>
+
+                            <div class="login-input-wrapper">
+
+                                <span class="input-icon">👤</span>
+
+                                <input asp-for="FullName"
+                                       class="login-input"
+                                       placeholder="Enter your full name"
+                                       autocomplete="name" />
+
+                            </div>
+
+                            <span asp-validation-for="FullName"
+                                  class="text-danger input-error">
+                            </span>
+
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="login-input-group">
+
+                            <label asp-for="Email">
+                                Email Address
+                            </label>
+
+                            <div class="login-input-wrapper">
+
+                                <span class="input-icon">✉</span>
+
+                                <input asp-for="Email"
+                                       type="email"
+                                       class="login-input"
+                                       placeholder="name@example.com"
+                                       autocomplete="email" />
+
+                            </div>
+
+                            <span asp-validation-for="Email"
+                                  class="text-danger input-error">
+                            </span>
+
+                        </div>
+
+                        <!-- PASSWORD -->
+                        <div class="login-input-group">
+
+                            <label asp-for="Password">
+                                Password
+                            </label>
+
+                            <div class="login-input-wrapper">
+
+                                <span class="input-icon">🔒</span>
+
+                                <input asp-for="Password"
+                                       id="registerPassword"
+                                       type="password"
+                                       class="login-input"
+                                       placeholder="Create a password"
+                                       autocomplete="new-password" />
+
+                                <button type="button"
+                                        class="password-toggle"
+                                        onclick="toggleRegisterPassword(
+                                    'registerPassword',
+                                    'registerPasswordIcon',
+                                    this
+                                    )"
+                                        aria-label="Show password">
+
+                                    <span id="registerPasswordIcon">👁</span>
+
+                                </button>
+
+                            </div>
+
+                            <span asp-validation-for="Password"
+                                  class="text-danger input-error">
+                            </span>
+
+                        </div>
+
+                        <!-- CONFIRM PASSWORD -->
+                        <div class="login-input-group">
+
+                            <label asp-for="ConfirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <div class="login-input-wrapper">
+
+                                <span class="input-icon">🔐</span>
+
+                                <input asp-for="ConfirmPassword"
+                                       id="confirmRegisterPassword"
+                                       type="password"
+                                       class="login-input"
+                                       placeholder="Confirm your password"
+                                       autocomplete="new-password" />
+
+                                <button type="button"
+                                        class="password-toggle"
+                                        onclick="toggleRegisterPassword(
+                                    'confirmRegisterPassword',
+                                    'confirmPasswordIcon',
+                                    this
+                                    )"
+                                        aria-label="Show password">
+
+                                    <span id="confirmPasswordIcon">👁</span>
+
+                                </button>
+
+                            </div>
+
+                            <span asp-validation-for="ConfirmPassword"
+                                  class="text-danger input-error">
+                            </span>
+
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <button type="submit"
+                                class="login-submit-button">
+
+                            Create Account
+
+                            <span>→</span>
+
+                        </button>
+
+                    </form>
+
+                    <!-- LOGIN NAVIGATION -->
+                    <div class="login-divider">
+                        <span>ALREADY REGISTERED?</span>
+                    </div>
+
+                    <div class="login-register">
+
+                        Already have an account?
+
+                        <a asp-controller="Account"
+                           asp-action="Login">
+
+                            Sign in
+
+                        </a>
+
+                    </div>
+
+                    <!-- SECURITY NOTE -->
+                    <div class="login-security-note">
+
+                        <span>🔐</span>
+
+                        Your account information is protected.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+    <script>
+            function toggleRegisterPassword(inputId, iconId, button) {
+
+                const passwordInput = document.getElementById(inputId);
+                const toggleIcon = document.getElementById(iconId);
+
+                if (passwordInput.type === "password") {
+
+                    passwordInput.type = "text";
+                    toggleIcon.textContent = "🙈";
+
+                    button.setAttribute(
+                        "aria-label",
+                        "Hide password"
+                    );
+
+                } else {
+
+                    passwordInput.type = "password";
+                    toggleIcon.textContent = "👁";
+
+                    button.setAttribute(
+                        "aria-label",
+                        "Show password"
+                    );
+                }
+            }
+    </script>
+
+</body>
+</html>

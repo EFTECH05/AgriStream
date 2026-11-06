@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build files
+bin/
+obj/
+
+# Temporary files
+*.tmp
+*.bak
+
+# Sensitive configuration
+appsettings.json
+appsettings.Development.json
+secrets.json
+
+# Other generated files
+TestResults/

@@ -1,0 +1,204 @@
+﻿
+@model Agristream.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login | AgriStream";
+}
+
+<div class="login-page">
+
+    <div class="login-container">
+
+        <!-- Left Side: Welcome Section -->
+        <div class="login-visual">
+
+            <div class="login-visual-overlay"></div>
+
+            <div class="login-brand">
+                <img src="~/images/lo1.png"
+                     alt="AgriStream Logo" />
+                <span>AgriStream</span>
+            </div>
+
+            <div class="login-visual-content">
+                <span class="login-tag">
+                    SMART AGRICULTURE TECHNOLOGY
+                </span>
+
+                <h1>
+                    Welcome back to
+                    <span>smarter farming.</span>
+                </h1>
+
+                <p>
+                    Connect to your agricultural intelligence
+                    platform and stay informed about your farm
+                    conditions, sensor activity and operations.
+                </p>
+
+                <div class="login-benefits">
+                    <div>
+                        <span>✓</span>
+                        Real-time farm monitoring
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Intelligent sensor processing
+                    </div>
+
+                    <div>
+                        <span>✓</span>
+                        Cloud-powered technology
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-visual-footer">
+                <span>🌱</span>
+                Growing a smarter agricultural future.
+            </div>
+
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="login-form-section">
+
+            <div class="login-form-wrapper">
+
+                <div class="login-mobile-brand">
+                    <img src="~/images/lo1.png"
+                         alt="AgriStream Logo" />
+                    <span>AgriStream</span>
+                </div>
+
+                <div class="login-heading">
+                    <span class="login-heading-label">
+                        ACCOUNT ACCESS
+                    </span>
+
+                    <h2>Welcome Back!</h2>
+
+                    <p>
+                        Enter your details to access your account.
+                    </p>
+                </div>
+
+                <form asp-controller="Account"
+                      asp-action="Login"
+                      method="post">
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger login-validation mb-3">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="login-input-group">
+                        <label asp-for="Email">Email Address</label>
+
+                        <div class="login-input-wrapper">
+                            <span class="input-icon">✉</span>
+
+                            <input asp-for="Email"
+                                   class="login-input"
+                                   type="email"
+                                   placeholder="name@example.com"
+                                   autocomplete="email" />
+                        </div>
+
+                        <span asp-validation-for="Email"
+                              class="text-danger input-error">
+                        </span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="login-input-group">
+                        <label asp-for="Password">Password</label>
+
+                        <div class="login-input-wrapper">
+                            <span class="input-icon">🔒</span>
+
+                            <input asp-for="Password"
+                                   id="loginPassword"
+                                   class="login-input"
+                                   type="password"
+                                   placeholder="Enter your password"
+                                   autocomplete="current-password" />
+
+                            <button type="button"
+                                    class="password-toggle"
+                                    onclick="toggleLoginPassword()"
+                                    aria-label="Show password">
+                                <span id="passwordToggleIcon">👁</span>
+                            </button>
+                        </div>
+
+                        <span asp-validation-for="Password"
+                              class="text-danger input-error">
+                        </span>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="login-options">
+                        <label class="remember-option">
+                            <input asp-for="RememberMe" />
+                            <span>Remember me</span>
+                        </label>
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit"
+                            class="login-submit-button">
+                        Sign In
+                        <span>→</span>
+                    </button>
+
+                </form>
+
+                <div class="login-divider">
+                    <span>NEW TO AGRISTREAM?</span>
+                </div>
+
+                <div class="login-register">
+                    Don't have an account?
+
+                    <a asp-controller="Account"
+                       asp-action="Register">
+                        Create an account
+                    </a>
+                </div>
+
+                <div class="login-security-note">
+                    <span>🔐</span>
+                    Your account access is protected.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function toggleLoginPassword() {
+            const passwordInput = document.getElementById("loginPassword");
+            const toggleIcon = document.getElementById("passwordToggleIcon");
+            const toggleButton = document.querySelector(".password-toggle");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleIcon.textContent = "🙈";
+                toggleButton.setAttribute("aria-label", "Hide password");
+            } else {
+                passwordInput.type = "password";
+                toggleIcon.textContent = "👁";
+                toggleButton.setAttribute("aria-label", "Show password");
+            }
+        }
+    </script>
+}
