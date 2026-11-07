@@ -1,292 +1,381 @@
-﻿
-
-@{
+﻿@{
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<div class="container-fluid py-4">
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin-dashboard.css" asp-append-version="true" />
+}
 
-    <!-- Welcome Header -->
-    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+<div class="admin-dashboard">
+
+    <!-- Dashboard Header -->
+    <section class="admin-hero mb-4">
+        <div class="admin-hero-content">
+            <div>
+                <span class="admin-eyebrow">
+                    <i class="bi bi-grid-1x2-fill"></i> AGRISTREAM MANAGEMENT
+                </span>
+
+                <h1>Admin Dashboard</h1>
+
+                <p>
+                    Welcome back. Monitor your agricultural platform,
+                    manage users, farms, sensor readings and drone imagery.
+                </p>
+            </div>
+
+            <div class="admin-hero-status">
+                <span class="admin-status-dot"></span>
+                Administrator Access
+            </div>
+        </div>
+
+        <div class="admin-hero-decoration">
+            <i class="bi bi-flower1"></i>
+        </div>
+    </section>
+
+    <!-- Overview -->
+    <div class="admin-section-heading">
         <div>
-            <h2 class="fw-bold text-success mb-1">
-                <i class="bi bi-speedometer2"></i> Admin Dashboard
-            </h2>
-            <p class="text-muted mb-0">
-                Welcome to AgriStream IoT Management System.
-                Manage your farms, users and monitoring services.
-            </p>
+            <h4>Platform Overview</h4>
+            <p>Live statistics retrieved from the AgriStream database.</p>
         </div>
 
-        <div class="mt-3 mt-md-0">
-            <span class="badge bg-success-subtle text-success px-3 py-2">
-                <i class="bi bi-shield-check"></i> Administrator
-            </span>
-        </div>
+        <span class="admin-period">
+            <i class="bi bi-calendar3"></i> Current Overview
+        </span>
     </div>
 
     <!-- Statistics -->
     <div class="row g-4 mb-4">
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card border-0 shadow-sm rounded-4 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <p class="text-muted mb-2">Total Users</p>
-                            <h3 class="fw-bold mb-0">--</h3>
-                        </div>
-                        <div class="bg-success-subtle text-success rounded-3 p-3">
-                            <i class="bi bi-people fs-3"></i>
-                        </div>
+        <!-- Users -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="admin-stat-card h-100">
+                <div class="admin-stat-top">
+                    <div class="admin-stat-icon users">
+                        <i class="bi bi-people-fill"></i>
                     </div>
-                    <small class="text-muted">Registered system users</small>
+                    <span class="admin-stat-label">USER ACCOUNTS</span>
                 </div>
+
+                <h2>@(ViewBag.TotalUsers ?? "--")</h2>
+                <p>Total Registered Users</p>
+
+                <div class="admin-stat-footer">
+                    <i class="bi bi-database-check"></i>
+                    <span>Platform accounts</span>
+                </div>
+
+                <a asp-controller="Admin"
+                   asp-action="Users"
+                   class="admin-management-link mt-3">
+                    View All Users
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
             </div>
         </div>
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card border-0 shadow-sm rounded-4 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <p class="text-muted mb-2">Total Farms</p>
-                            <h3 class="fw-bold mb-0">--</h3>
-                        </div>
-                        <div class="bg-primary-subtle text-primary rounded-3 p-3">
-                            <i class="bi bi-house-door fs-3"></i>
-                        </div>
+        <!-- Farms -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="admin-stat-card h-100">
+                <div class="admin-stat-top">
+                    <div class="admin-stat-icon farms">
+                        <i class="bi bi-houses-fill"></i>
                     </div>
-                    <small class="text-muted">Registered farms</small>
+                    <span class="admin-stat-label">FARM NETWORK</span>
                 </div>
+
+                <h2>@(ViewBag.TotalFarms ?? "--")</h2>
+                <p>Total Registered Farms</p>
+
+                <div class="admin-stat-footer">
+                    <i class="bi bi-database-check"></i>
+                    <span>Farm registrations</span>
+                </div>
+
+                <a asp-controller="Farm"
+                   asp-action="Index"
+                   class="admin-management-link mt-3">
+                    View All Farms
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
             </div>
         </div>
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card border-0 shadow-sm rounded-4 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <p class="text-muted mb-2">Sensor Readings</p>
-                            <h3 class="fw-bold mb-0">--</h3>
-                        </div>
-                        <div class="bg-warning-subtle text-warning rounded-3 p-3">
-                            <i class="bi bi-activity fs-3"></i>
-                        </div>
+        <!-- Sensors -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="admin-stat-card h-100">
+                <div class="admin-stat-top">
+                    <div class="admin-stat-icon sensors">
+                        <i class="bi bi-activity"></i>
                     </div>
-                    <small class="text-muted">Collected IoT readings</small>
+                    <span class="admin-stat-label">IOT MONITORING</span>
                 </div>
+
+                <h2>@(ViewBag.TotalSensorReadings ?? "--")</h2>
+                <p>Sensor Readings</p>
+
+                <div class="admin-stat-footer">
+                    <i class="bi bi-cpu"></i>
+                    <span>Telemetry integration pending</span>
+                </div>
+
+                <span class="admin-feature-status planned mt-3">
+                    <i class="bi bi-clock"></i> Integration pending
+                </span>
             </div>
         </div>
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card border-0 shadow-sm rounded-4 h-100">
-                <div class="card-body p-4">
-                    <div class="d-flex justify-content-between">
-                        <div>
-                            <p class="text-muted mb-2">Drone Images</p>
-                            <h3 class="fw-bold mb-0">--</h3>
-                        </div>
-                        <div class="bg-info-subtle text-info rounded-3 p-3">
-                            <i class="bi bi-images fs-3"></i>
-                        </div>
+        <!-- Drone Images -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="admin-stat-card h-100">
+                <div class="admin-stat-top">
+                    <div class="admin-stat-icon images">
+                        <i class="bi bi-images"></i>
                     </div>
-                    <small class="text-muted">Stored farm images</small>
+                    <span class="admin-stat-label">MEDIA STORAGE</span>
                 </div>
+
+                <h2>@(ViewBag.TotalDroneImages ?? "--")</h2>
+                <p>Drone Images</p>
+
+                <div class="admin-stat-footer">
+                    <i class="bi bi-database-check"></i>
+                    <span>Azure SQL image records</span>
+                </div>
+
+                <a asp-controller="DroneImages"
+                   asp-action="Index"
+                   class="admin-management-link mt-3">
+                    View Uploaded Images
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
             </div>
         </div>
 
     </div>
 
-    <!-- Management Section -->
+    <!-- System Management -->
     <div class="row g-4 mb-4">
 
-        <div class="col-lg-8">
-            <div class="card border-0 shadow-sm rounded-4 h-100">
+        <div class="col-xl-8">
+            <div class="admin-panel h-100">
 
-                <div class="card-header bg-white border-0 pt-4 px-4">
-                    <h5 class="fw-bold mb-1">System Management</h5>
-                    <p class="text-muted small">
-                        Manage the main components of AgriStream.
-                    </p>
+                <div class="admin-panel-header">
+                    <div>
+                        <h4>System Management</h4>
+                        <p>Access and manage platform services.</p>
+                    </div>
+
+                    <div class="admin-panel-header-icon">
+                        <i class="bi bi-sliders"></i>
+                    </div>
                 </div>
 
-                <div class="card-body px-4 pb-4">
-                    <div class="row g-3">
+                <div class="row g-3">
 
-                        <!-- User Management -->
-                        <div class="col-md-6">
-                            <div class="border rounded-3 p-3 h-100">
-                                <div class="text-success mb-3">
-                                    <i class="bi bi-people fs-2"></i>
-                                </div>
-
-                                <h6 class="fw-bold">User Management</h6>
-
-                                <p class="text-muted small">
-                                    View and manage registered users.
-                                </p>
-
-                                <span class="badge bg-secondary">
-                                    Coming soon
-                                </span>
+                    <!-- User Management -->
+                    <div class="col-md-6">
+                        <div class="admin-management-card">
+                            <div class="admin-management-icon users">
+                                <i class="bi bi-person-lines-fill"></i>
                             </div>
+
+                            <h5>User Management</h5>
+
+                            <p>
+                                View registered users, account details
+                                and platform access.
+                            </p>
+
+                            <a asp-controller="Admin"
+                               asp-action="Users"
+                               class="admin-management-link">
+                                Manage Users
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
                         </div>
-
-                        <!-- Farm Management -->
-                        <div class="col-md-6">
-                            <div class="border rounded-3 p-3 h-100">
-                                <div class="text-primary mb-3">
-                                    <i class="bi bi-house-door fs-2"></i>
-                                </div>
-
-                                <h6 class="fw-bold">Farm Management</h6>
-
-                                <p class="text-muted small">
-                                    Manage farm information and registrations.
-                                </p>
-
-                                <a asp-controller="Farm"
-                                   asp-action="Index"
-                                   class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-arrow-right-circle"></i>
-                                    Manage Farms
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Sensor Monitoring -->
-                        <div class="col-md-6">
-                            <div class="border rounded-3 p-3 h-100">
-                                <div class="text-warning mb-3">
-                                    <i class="bi bi-activity fs-2"></i>
-                                </div>
-
-                                <h6 class="fw-bold">Sensor Monitoring</h6>
-
-                                <p class="text-muted small">
-                                    Monitor incoming IoT sensor readings.
-                                </p>
-
-                                <span class="badge bg-secondary">
-                                    Coming soon
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Drone Images -->
-                        <div class="col-md-6">
-                            <div class="border rounded-3 p-3 h-100">
-                                <div class="text-info mb-3">
-                                    <i class="bi bi-camera fs-2"></i>
-                                </div>
-
-                                <h6 class="fw-bold">Drone Images</h6>
-
-                                <p class="text-muted small">
-                                    Manage uploaded agricultural images.
-                                </p>
-
-                                <span class="badge bg-secondary">
-                                    Coming soon
-                                </span>
-                            </div>
-                        </div>
-
                     </div>
+
+                    <!-- Farm Management -->
+                    <div class="col-md-6">
+                        <div class="admin-management-card">
+                            <div class="admin-management-icon farms">
+                                <i class="bi bi-house-gear-fill"></i>
+                            </div>
+
+                            <h5>Farm Management</h5>
+
+                            <p>
+                                View registered farms and their
+                                agricultural information.
+                            </p>
+
+                            <a asp-controller="Farm"
+                               asp-action="Index"
+                               class="admin-management-link">
+                                Manage Farms
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Sensor Monitoring -->
+                    <div class="col-md-6">
+                        <div class="admin-management-card">
+                            <div class="admin-management-icon sensors">
+                                <i class="bi bi-broadcast-pin"></i>
+                            </div>
+
+                            <h5>Sensor Monitoring</h5>
+
+                            <p>
+                                Monitor incoming IoT readings,
+                                environmental data and sensor activity.
+                            </p>
+
+                            <span class="admin-feature-status planned">
+                                <i class="bi bi-clock"></i>
+                                Integration pending
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Drone Image Gallery -->
+                    <div class="col-md-6">
+                        <div class="admin-management-card">
+                            <div class="admin-management-icon images">
+                                <i class="bi bi-camera-fill"></i>
+                            </div>
+
+                            <h5>Drone Image Gallery</h5>
+
+                            <p>
+                                View uploaded drone images, inspect
+                                image details and open full-size images.
+                            </p>
+
+                            <a asp-controller="DroneImages"
+                               asp-action="Index"
+                               class="admin-management-link">
+                                Open Image Gallery
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
-        <!-- Administrator Information -->
-        <div class="col-lg-4">
-            <div class="card border-0 shadow-sm rounded-4 h-100">
-                <div class="card-body p-4">
+        <!-- Administrator Profile -->
+        <div class="col-xl-4">
+            <div class="admin-panel admin-profile-panel h-100">
 
-                    <div class="text-center mb-4">
-                        <div class="bg-success-subtle text-success rounded-circle d-inline-flex align-items-center justify-content-center"
-                             style="width:80px;height:80px;">
-                            <i class="bi bi-person-gear fs-1"></i>
-                        </div>
+                <div class="admin-panel-header">
+                    <div>
+                        <h4>Administrator</h4>
+                        <p>Account information and access.</p>
+                    </div>
+                </div>
 
-                        <h5 class="fw-bold mt-3 mb-1">
-                            System Administrator
-                        </h5>
+                <div class="admin-profile-content">
 
-                        <p class="text-muted small mb-0">
-                            AgriStream Management
-                        </p>
+                    <div class="admin-avatar">
+                        <i class="bi bi-person-fill-gear"></i>
                     </div>
 
-                    <hr />
+                    <h5>System Administrator</h5>
 
-                    <div class="mb-3">
-                        <small class="text-muted">Administrator Email</small>
-                        <p class="fw-semibold mb-0">
+                    <p class="admin-profile-subtitle">
+                        AgriStream Management
+                    </p>
+
+                    <span class="admin-role-badge">
+                        <i class="bi bi-shield-check"></i>
+                        Administrator
+                    </span>
+
+                </div>
+
+                <div class="admin-account-details">
+
+                    <div class="admin-account-item">
+                        <span>Email Address</span>
+                        <strong class="admin-email">
                             @User.Identity?.Name
-                        </p>
+                        </strong>
                     </div>
 
-                    <div class="mb-3">
-                        <small class="text-muted">Account Role</small>
-                        <p class="fw-semibold text-success mb-0">
-                            Administrator
-                        </p>
+                    <div class="admin-account-item">
+                        <span>Account Role</span>
+                        <strong>Administrator</strong>
                     </div>
 
-                    <div class="mb-3">
-                        <small class="text-muted">Account Status</small>
-                        <p class="fw-semibold mb-0">
-                            <i class="bi bi-check-circle-fill text-success"></i>
+                    <div class="admin-account-item">
+                        <span>Account Status</span>
+                        <strong class="admin-active">
+                            <i class="bi bi-check-circle-fill"></i>
                             Active
-                        </p>
+                        </strong>
                     </div>
 
-                    <hr />
-
-                    <form asp-controller="Account"
-                          asp-action="Logout"
-                          method="post">
-
-                        @Html.AntiForgeryToken()
-
-                        <button type="submit"
-                                class="btn btn-outline-danger w-100">
-                            <i class="bi bi-box-arrow-right"></i>
-                            Logout
-                        </button>
-
-                    </form>
-
                 </div>
+
+                <form asp-controller="Account"
+                      asp-action="Logout"
+                      method="post"
+                      class="mt-4">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit" class="admin-logout-btn">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Sign Out
+                    </button>
+
+                </form>
+
             </div>
         </div>
 
     </div>
 
-    <!-- System Information -->
-    <div class="card border-0 shadow-sm rounded-4">
-        <div class="card-body p-4">
+    <!-- Platform Information -->
+    <div class="admin-panel admin-platform-panel">
 
-            <div class="d-flex align-items-center gap-3">
-                <div class="bg-success-subtle text-success rounded-3 p-3">
-                    <i class="bi bi-cloud-check fs-3"></i>
-                </div>
-
-                <div>
-                    <h6 class="fw-bold mb-1">
-                        AgriStream IoT Platform
-                    </h6>
-
-                    <p class="text-muted small mb-0">
-                        Centralised agricultural monitoring and
-                        management platform.
-                    </p>
-                </div>
-            </div>
-
+        <div class="admin-platform-icon">
+            <i class="bi bi-cloud-check-fill"></i>
         </div>
+
+        <div class="admin-platform-content">
+            <h5>AgriStream IoT Platform</h5>
+
+            <p>
+                A centralised agricultural monitoring and management
+                solution powered by cloud technologies.
+            </p>
+
+            <div class="admin-platform-tags">
+                <span><i class="bi bi-database"></i> Azure SQL</span>
+                <span><i class="bi bi-cloud"></i> Azure Cloud</span>
+                <span><i class="bi bi-camera"></i> Drone Imagery</span>
+                <span><i class="bi bi-cpu"></i> IoT Monitoring</span>
+            </div>
+        </div>
+
+        <div class="admin-platform-indicator">
+            <span class="admin-status-dot"></span>
+            Application Dashboard
+        </div>
+
     </div>
+
+    <footer class="admin-footer">
+        <span>AgriStream IoT Management System</span>
+        <span>Administrator Portal</span>
+    </footer>
 
 </div>
-

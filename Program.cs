@@ -52,9 +52,12 @@ builder.Services.ConfigureApplicationCookie(options =>
 // 5. Register MVC
 builder.Services.AddControllersWithViews();
 
+// 6. Register Azure Blob Storage service
+builder.Services.AddSingleton<BlobStorageService>();
+
 var app = builder.Build();
 
-// 6. Seed Admin and User roles and create Admin account
+// 7. Seed Admin and User roles and create Admin account
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -78,7 +81,7 @@ using (var scope = app.Services.CreateScope())
     );
 }
 
-// 7. Configure HTTP request pipeline
+// 8. Configure HTTP request pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -94,7 +97,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// 8. Configure default MVC route
+// 9. Configure default MVC route
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

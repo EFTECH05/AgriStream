@@ -4,7 +4,11 @@
   </Folder>
   <Folder Name="/Services/">
     <File Path="AdminSeeder.cs" />
+    <File Path="BlobStorageService.cs" />
     <File Path="RoleSeeder.cs" />
+  </Folder>
+  <Folder Name="/ViewModels/">
+    <File Path="DroneImageListItem.cs" />
   </Folder>
   <Project Path="Agristream.csproj" />
 </Solution>

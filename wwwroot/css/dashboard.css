@@ -1,135 +1,702 @@
 ﻿
-/* =====================================
+
+/* ==========================================
    AGRISTREAM FARMER DASHBOARD
-===================================== */
+========================================== */
 
-body {
-    background-color: #f4f7f2;
-    font-family: 'Segoe UI', sans-serif;
-    color: #26372b;
+.farmer-dashboard {
+    --farm-green: #26764b;
+    --farm-dark: #174b32;
+    --farm-light: #eaf5ed;
+    --farm-text: #263a2e;
+    --farm-muted: #849087;
+    --farm-border: #e7eee8;
+    color: var(--farm-text);
+    padding: 24px 0;
 }
 
-/* Welcome Header */
+/* HERO BANNER */
 
-.dashboard-header {
-    background: linear-gradient(120deg, #14532d, #23834a);
+.farmer-hero {
+    position: relative;
+    overflow: hidden;
+    min-height: 230px;
+    padding: 35px;
+    border-radius: 21px;
     color: white;
-    padding: 32px;
-    border-radius: 16px;
-    margin-bottom: 28px;
+    background: linear-gradient(115deg, #174b32, #26764b 65%, #39895b);
 }
 
-    .dashboard-header h2 {
-        font-weight: 700;
-    }
-
-    .dashboard-header p {
-        opacity: 0.9;
-    }
-
-/* Dashboard Cards */
-
-.dashboard-card {
-    background: white;
-    border: none;
-    border-radius: 14px;
-    padding: 22px;
-    height: 100%;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.farmer-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
 }
 
-    .dashboard-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-    }
-
-/* Metric Icons */
-
-.metric-icon {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #e8f5e9;
-    border-radius: 12px;
-    font-size: 24px;
+.farmer-eyebrow {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+    color: #c7ead2;
+    margin-bottom: 15px;
 }
 
-/* Metric Values */
-
-.metric-value {
-    font-size: 30px;
-    font-weight: 700;
-    color: #183b25;
+.farmer-hero h1 {
+    color: white;
+    font-size: clamp(25px, 4vw, 35px);
+    font-weight: 800;
+    margin-bottom: 10px;
 }
 
-/* Section Cards */
-
-.section-card {
-    background: white;
-    border-radius: 14px;
-    padding: 24px;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.04);
-    height: 100%;
-}
-
-.dashboard-heading {
-    color: #183b25;
-    font-weight: 700;
-}
-
-/* Sensor Status */
-
-.status-online {
-    color: #198754;
-    font-weight: 600;
-}
-
-/* Tables */
-
-.dashboard-table th {
-    color: #68756c;
+.farmer-hero p {
+    max-width: 590px;
+    color: #d8ebdf;
     font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
+    line-height: 1.8;
+    margin-bottom: 20px;
 }
 
-.dashboard-table td {
-    vertical-align: middle;
-    padding: 15px 10px;
+.farmer-hero-user {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 30px;
+    padding: 8px 15px 8px 8px;
 }
 
-/* Activity */
-
-.activity-icon {
-    width: 38px;
-    height: 38px;
-    background: #e8f5e9;
+.farmer-avatar {
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
+    background: #d8efdf;
+    color: var(--farm-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+}
+
+.farmer-hero-user small,
+.farmer-hero-user strong {
+    display: block;
+}
+
+.farmer-hero-user small {
+    color: #d1e9d9;
+    font-size: 9px;
+}
+
+.farmer-hero-user strong {
+    color: white;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+}
+
+.farmer-hero-art {
+    position: absolute;
+    right: 45px;
+    bottom: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,.1);
+    pointer-events: none;
+}
+
+    .farmer-hero-art .bi-tree-fill {
+        font-size: 145px;
+    }
+
+    .farmer-hero-art .bi-cloud-sun-fill {
+        font-size: 85px;
+        align-self: flex-start;
+        margin-top: 25px;
+    }
+
+/* SECTION HEADING */
+
+.farmer-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+    .farmer-section-heading h4 {
+        font-size: 17px;
+        font-weight: 800;
+        margin-bottom: 5px;
+    }
+
+    .farmer-section-heading p {
+        color: var(--farm-muted);
+        font-size: 12px;
+        margin: 0;
+    }
+
+.farmer-demo-label,
+.farmer-panel-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #f2f5ed;
+    color: #71804e;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* OVERVIEW STATISTICS */
+
+.farmer-stat-card {
+    height: 100%;
+    padding: 21px;
+    border-radius: 15px;
+    background: white;
+    border: 1px solid var(--farm-border);
+    box-shadow: 0 4px 17px rgba(25,70,42,.035);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+    .farmer-stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(25,70,42,.08);
+    }
+
+.farmer-stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.farmer-stat-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    font-size: 21px;
 }
 
-/* Responsive Design */
-
-@media (max-width: 768px) {
-    .dashboard-header {
-        padding: 22px;
+    .farmer-stat-icon.farms {
+        background: #e9f4eb;
+        color: #398251;
     }
 
-        .dashboard-header h2 {
-            font-size: 23px;
+    .farmer-stat-icon.temperature {
+        background: #fff0e6;
+        color: #d77a38;
+    }
+
+    .farmer-stat-icon.moisture {
+        background: #e8f3fc;
+        color: #438bc4;
+    }
+
+    .farmer-stat-icon.sensors {
+        background: #f0edfb;
+        color: #8068bb;
+    }
+
+.farmer-stat-caption {
+    color: #94a096;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.farmer-stat-card h2 {
+    margin-top: 19px;
+    margin-bottom: 3px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #263f30;
+}
+
+    .farmer-stat-card h2 small {
+        font-size: 17px;
+        margin-left: 2px;
+    }
+
+.farmer-stat-card > p {
+    font-size: 12px;
+    color: #718078;
+    margin-bottom: 17px;
+}
+
+.farmer-stat-bottom {
+    border-top: 1px solid #edf1ed;
+    padding-top: 11px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    color: #89958d;
+}
+
+    .farmer-stat-bottom i {
+        color: #6a9a77;
+    }
+
+/* GENERAL PANELS */
+
+.farmer-panel {
+    background: white;
+    border: 1px solid var(--farm-border);
+    border-radius: 17px;
+    padding: 24px;
+    box-shadow: 0 4px 17px rgba(25,70,42,.035);
+}
+
+.farmer-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+    .farmer-panel-header h4 {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 5px;
+    }
+
+        .farmer-panel-header h4 > i {
+            color: var(--farm-green);
+            margin-right: 7px;
         }
 
-    .metric-value {
-        font-size: 25px;
+    .farmer-panel-header p {
+        color: var(--farm-muted);
+        font-size: 11px;
+        margin: 0;
     }
 
-    .section-card {
+/* ENVIRONMENTAL MONITORING */
+
+.farmer-environment-card {
+    height: 100%;
+    padding: 19px;
+    border: 1px solid #edf1ed;
+    border-radius: 13px;
+    background: #fbfdfb;
+}
+
+.farmer-environment-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #718078;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+    .farmer-environment-top i {
+        font-size: 19px;
+        color: var(--farm-green);
+    }
+
+.farmer-environment-value {
+    font-size: 30px;
+    font-weight: 800;
+    color: #294b35;
+    margin: 16px 0;
+}
+
+    .farmer-environment-value small {
+        font-size: 16px;
+        margin-left: 2px;
+    }
+
+.farmer-progress {
+    width: 100%;
+    height: 7px;
+    overflow: hidden;
+    background: #e9eee9;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.farmer-progress-fill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.temperature-fill {
+    background: #e39a54;
+}
+
+.humidity-fill {
+    background: #5799ce;
+}
+
+.moisture-fill {
+    background: #4a9c68;
+}
+
+.farmer-reading-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #819087;
+    font-size: 10px;
+}
+
+/* DRONE UPLOAD BANNER */
+
+.farmer-drone-banner {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    padding: 23px;
+    background: linear-gradient(110deg, #f0f7f1, #f9fcf9);
+    border: 1px solid #dfece1;
+    border-radius: 16px;
+}
+
+.farmer-drone-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: #dcefe1;
+    color: var(--farm-green);
+    font-size: 25px;
+}
+
+.farmer-drone-content {
+    flex: 1;
+}
+
+    .farmer-drone-content h4 {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 6px;
+    }
+
+    .farmer-drone-content p {
+        color: #77867b;
+        font-size: 11px;
+        line-height: 1.7;
+        margin: 0;
+    }
+
+.farmer-primary-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 17px;
+    border-radius: 9px;
+    background: var(--farm-green);
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+    transition: background .2s ease, transform .2s ease;
+}
+
+    .farmer-primary-btn:hover {
+        background: var(--farm-dark);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+/* SENSOR HEALTH */
+
+.farmer-sensor-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.farmer-sensor-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #edf1ed;
+}
+
+    .farmer-sensor-item:first-child {
+        padding-top: 0;
+    }
+
+.farmer-sensor-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #edf5ef;
+    color: var(--farm-green);
+    font-size: 17px;
+}
+
+.farmer-sensor-info {
+    flex: 1;
+    min-width: 0;
+}
+
+    .farmer-sensor-info strong,
+    .farmer-sensor-info small {
+        display: block;
+    }
+
+    .farmer-sensor-info strong {
+        font-size: 11px;
+        font-weight: 800;
+    }
+
+    .farmer-sensor-info small {
+        color: #95a097;
+        font-size: 9px;
+        margin-top: 4px;
+    }
+
+.farmer-sensor-badge {
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+    .farmer-sensor-badge.online {
+        color: #27804b;
+        background: #e8f5ec;
+    }
+
+    .farmer-sensor-badge.offline {
+        color: #c34a4a;
+        background: #fcecec;
+    }
+
+.farmer-information-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #89958c;
+    font-size: 10px;
+    line-height: 1.6;
+    background: #f7f9f7;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 16px;
+}
+
+/* RECENT READINGS TABLE */
+
+.farmer-table-wrapper {
+    overflow-x: auto;
+}
+
+.farmer-table {
+    min-width: 460px;
+}
+
+    .farmer-table thead th {
+        background: #f5f8f5;
+        color: #748078;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .5px;
+        padding: 13px;
+        border-bottom: 1px solid #e8eee8;
+        white-space: nowrap;
+    }
+
+    .farmer-table tbody td {
+        padding: 14px 13px;
+        font-size: 11px;
+        color: #52645a;
+        border-color: #edf1ed;
+    }
+
+        .farmer-table tbody td strong,
+        .farmer-table tbody td small {
+            display: block;
+        }
+
+        .farmer-table tbody td strong {
+            color: #34493a;
+            font-size: 11px;
+        }
+
+        .farmer-table tbody td small {
+            font-size: 9px;
+            color: #9aa49d;
+            margin-top: 4px;
+        }
+
+.farmer-table-status {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 6px 9px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+    .farmer-table-status.normal {
+        background: #e8f5ec;
+        color: #27804b;
+    }
+
+/* RECENT ACTIVITIES */
+
+.farmer-activity-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.farmer-activity-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 0;
+    border-bottom: 1px solid #edf1ed;
+}
+
+    .farmer-activity-item:first-child {
+        padding-top: 0;
+    }
+
+    .farmer-activity-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+.farmer-activity-icon {
+    width: 39px;
+    height: 39px;
+    min-width: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    font-size: 16px;
+}
+
+    .farmer-activity-icon.green {
+        background: #e8f5ec;
+        color: #27804b;
+    }
+
+    .farmer-activity-icon.blue {
+        background: #eaf2fb;
+        color: #4d85c2;
+    }
+
+    .farmer-activity-icon.orange {
+        background: #fff2e5;
+        color: #cf8a43;
+    }
+
+.farmer-activity-item strong,
+.farmer-activity-item small {
+    display: block;
+}
+
+.farmer-activity-item strong {
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.farmer-activity-item small {
+    color: #929e95;
+    font-size: 10px;
+    margin-top: 4px;
+}
+
+/* FOOTER */
+
+.farmer-footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: #929e96;
+    font-size: 10px;
+    padding: 4px 2px;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 767px) {
+
+    .farmer-dashboard {
+        padding-top: 12px;
+    }
+
+    .farmer-hero {
+        padding: 25px 20px;
+        min-height: 220px;
+    }
+
+    .farmer-hero-art {
+        right: 4px;
+    }
+
+        .farmer-hero-art .bi-tree-fill {
+            font-size: 90px;
+        }
+
+        .farmer-hero-art .bi-cloud-sun-fill {
+            font-size: 55px;
+        }
+
+    .farmer-hero p {
+        max-width: 90%;
+    }
+
+    .farmer-panel {
         padding: 18px;
+    }
+
+    .farmer-drone-banner {
+        flex-wrap: wrap;
+        padding: 19px;
+    }
+
+    .farmer-drone-content {
+        flex-basis: calc(100% - 80px);
+    }
+
+    .farmer-primary-btn {
+        width: 100%;
+    }
+
+    .farmer-footer {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .farmer-stat-card {
+        padding: 15px;
+    }
+
+    .farmer-stat-caption {
+        font-size: 8px;
+    }
+
+    .farmer-demo-label {
+        font-size: 9px;
     }
 }

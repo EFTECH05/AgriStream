@@ -18,24 +18,37 @@ namespace Agristream.Controllers
             _signInManager = signInManager;
         }
 
-        // Redirect users according to their roles
-        private IActionResult RedirectByRole()
+        // Redirect authenticated users according to their roles.
+        private async Task<IActionResult> RedirectByRoleAsync(
+            ApplicationUser user)
         {
-            if (User.IsInRole("Admin"))
+            if (await _userManager.IsInRoleAsync(user, "Admin"))
             {
                 return RedirectToAction("Index", "Admin");
             }
 
-            return RedirectToAction("Index", "Dashboard");
+            if (await _userManager.IsInRoleAsync(user, "User"))
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Login");
         }
 
         // GET: Account/Register
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
             if (User.Identity?.IsAuthenticated == true)
             {
-                return RedirectByRole();
+                var currentUser = await _userManager.GetUserAsync(User);
+
+                if (currentUser != null)
+                {
+                    return await RedirectByRoleAsync(currentUser);
+                }
             }
 
             return View();
@@ -66,9 +79,10 @@ namespace Agristream.Controllers
 
             if (result.Succeeded)
             {
-                // Assign the normal User role
+                // Assign the normal User role.
                 var roleResult = await _userManager.AddToRoleAsync(
-                    user, "User"
+                    user,
+                    "User"
                 );
 
                 if (!roleResult.Succeeded)
@@ -87,7 +101,8 @@ namespace Agristream.Controllers
                 }
 
                 await _signInManager.SignInAsync(
-                    user, isPersistent: false
+                    user,
+                    isPersistent: false
                 );
 
                 return RedirectToAction("Index", "Dashboard");
@@ -106,14 +121,17 @@ namespace Agristream.Controllers
 
         // GET: Account/Login
         [HttpGet]
-        public IActionResult Login(string? returnUrl = null)
+        public async Task<IActionResult> Login()
         {
             if (User.Identity?.IsAuthenticated == true)
             {
-                return RedirectByRole();
-            }
+                var currentUser = await _userManager.GetUserAsync(User);
 
-            ViewData["ReturnUrl"] = returnUrl;
+                if (currentUser != null)
+                {
+                    return await RedirectByRoleAsync(currentUser);
+                }
+            }
 
             return View();
         }
@@ -127,7 +145,6 @@ namespace Agristream.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewData["ReturnUrl"] = returnUrl;
                 return View(model);
             }
 
@@ -140,24 +157,25 @@ namespace Agristream.Controllers
 
             if (result.Succeeded)
             {
-                if (!string.IsNullOrEmpty(returnUrl) &&
-                    Url.IsLocalUrl(returnUrl))
-                {
-                    return Redirect(returnUrl);
-                }
-
-                // Identify the logged-in user
                 var user = await _userManager.FindByEmailAsync(
                     model.Email
                 );
 
-                if (user != null &&
-                    await _userManager.IsInRoleAsync(user, "Admin"))
+                if (user != null)
                 {
-                    return RedirectToAction("Index", "Admin");
+                    // The user's role determines their dashboard.
+                    // Do not allow returnUrl to bypass this routing.
+                    return await RedirectByRoleAsync(user);
                 }
 
-                return RedirectToAction("Index", "Dashboard");
+                await _signInManager.SignOutAsync();
+
+                ModelState.AddModelError(
+                    string.Empty,
+                    "User account could not be found."
+                );
+
+                return View(model);
             }
 
             if (result.IsLockedOut)
@@ -174,8 +192,6 @@ namespace Agristream.Controllers
                     "Invalid email or password."
                 );
             }
-
-            ViewData["ReturnUrl"] = returnUrl;
 
             return View(model);
         }

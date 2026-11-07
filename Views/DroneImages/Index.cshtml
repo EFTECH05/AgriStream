@@ -1,0 +1,175 @@
+﻿
+@model IEnumerable<Agristream.ViewModels.DroneImageListItem>
+
+@{
+    ViewData["Title"] = "Drone Image Gallery";
+    var totalImages = Model.Count();
+}
+
+<div class="container-fluid py-4">
+
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+        <div>
+            <span class="text-primary fw-semibold small text-uppercase">
+                AgriStream Administration
+            </span>
+            <h2 class="fw-bold mb-1">Drone Image Gallery</h2>
+            <p class="text-muted mb-0">
+                View and inspect drone images uploaded to the AgriStream database.
+            </p>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a asp-controller="Admin"
+               asp-action="Index"
+               class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left me-1"></i>
+                Admin Dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="rounded-3 bg-primary bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-images text-primary fs-3"></i>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-1">Total Drone Images</p>
+                        <h3 class="fw-bold mb-0">@totalImages</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="rounded-3 bg-success bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-database-check text-success fs-3"></i>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-1">Storage</p>
+                        <h5 class="fw-bold mb-0">Azure SQL</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <div class="rounded-3 bg-info bg-opacity-10 p-3 me-3">
+                        <i class="bi bi-shield-check text-info fs-3"></i>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-1">Access</p>
+                        <h5 class="fw-bold mb-0">Administrator</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-0 py-3">
+            <h5 class="fw-bold mb-0">
+                <i class="bi bi-camera me-2 text-primary"></i>
+                Uploaded Drone Images
+            </h5>
+        </div>
+
+        <div class="card-body">
+
+            @if (!Model.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-image text-muted"
+                       style="font-size: 4rem;"></i>
+
+                    <h5 class="fw-bold mt-3">No Images Available</h5>
+
+                    <p class="text-muted">
+                        No drone images have been uploaded to the database yet.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="row g-4">
+
+                    @foreach (var image in Model)
+                    {
+                        <div class="col-sm-6 col-lg-4 col-xl-3">
+
+                            <div class="card h-100 border-0 shadow-sm">
+
+                                <div class="position-relative">
+                                    <img src="@Url.Action("ViewImage",
+                                                        "DroneImages",
+                                                        new { id = image.Id })"
+                                         alt="@image.FileName"
+                                         class="card-img-top"
+                                         loading="lazy"
+                                         style="height: 220px; object-fit: cover;" />
+
+                                    <span class="badge bg-dark position-absolute top-0 end-0 m-2">
+                                        ID: @image.Id
+                                    </span>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <h6 class="fw-bold text-break">
+                                        @image.FileName
+                                    </h6>
+
+                                    <p class="text-muted small mb-2">
+                                        <i class="bi bi-file-earmark-image me-1"></i>
+                                        @image.ContentType
+                                    </p>
+
+                                    <p class="text-muted small mb-2">
+                                        <i class="bi bi-hdd me-1"></i>
+                                        @Math.Round(image.FileSize / 1024.0, 2) KB
+                                    </p>
+
+                                    <p class="text-muted small mb-3">
+                                        <i class="bi bi-calendar3 me-1"></i>
+                                        @image.UploadedAt.ToLocalTime().ToString("dd MMM yyyy, HH:mm")
+                                    </p>
+
+                                    <a href="@Url.Action("ViewImage",
+                                                        "DroneImages",
+                                                        new { id = image.Id })"
+                                       target="_blank"
+                                       class="btn btn-outline-primary w-100 btn-sm">
+                                        <i class="bi bi-eye me-1"></i>
+                                        View Full Image
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <!-- Information -->
+    <div class="alert alert-info mt-4 border-0">
+        <i class="bi bi-info-circle me-2"></i>
+        Drone images displayed here are retrieved from the
+        <strong>DroneImages</strong> table in the AgriStream Azure SQL database.
+    </div>
+
+</div>

@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Upload Drone Image";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">
+                        <i class="bi bi-camera text-success"></i>
+                        Upload Drone Image
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Upload agricultural drone photographs to the AgriStream database.
+                    </p>
+                </div>
+
+                <a asp-controller="Dashboard"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+            </div>
+
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div class="alert alert-success">
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    @ViewBag.SuccessMessage
+
+                    @if (ViewBag.ImageId != null)
+                    {
+                        <hr />
+                        <strong>Database image ID:</strong>
+                        <br />
+                        <code>@ViewBag.ImageId</code>
+                    }
+                </div>
+            }
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4">
+
+                    <form asp-controller="DroneImages"
+                          asp-action="Upload"
+                          method="post"
+                          enctype="multipart/form-data">
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-4">
+                            <label for="image" class="form-label fw-semibold">
+                                Select Drone Image
+                            </label>
+
+                            <input type="file"
+                                   id="image"
+                                   name="image"
+                                   class="form-control"
+                                   accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                                   required />
+
+                            <div class="form-text">
+                                Supported formats: JPG, JPEG and PNG.
+                                Maximum file size: 10 MB.
+                            </div>
+                        </div>
+
+                        <div class="mb-4 text-center">
+                            <img id="imagePreview"
+                                 src=""
+                                 alt="Selected drone image preview"
+                                 class="img-fluid rounded shadow-sm d-none"
+                                 style="max-height: 350px;" />
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+
+                            <a asp-controller="Dashboard"
+                               asp-action="Index"
+                               class="btn btn-light">
+                                Cancel
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-success">
+                                <i class="bi bi-cloud-upload me-2"></i>
+                                Save Drone Image
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="alert alert-info mt-4">
+                <i class="bi bi-database-check me-2"></i>
+
+                <strong>Secure database storage</strong>
+
+                <p class="mb-0 mt-1">
+                    Your uploaded drone images are stored in the
+                    AgriStream Azure SQL database in the
+                    <strong>DroneImages</strong> table.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("image").addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById("imagePreview");
+
+            if (!file) {
+                preview.src = "";
+                preview.classList.add("d-none");
+                return;
+            }
+
+            const allowedTypes = ["image/jpeg", "image/png"];
+
+            if (!allowedTypes.includes(file.type)) {
+                alert("Please select a JPG, JPEG or PNG image.");
+                event.target.value = "";
+                preview.src = "";
+                preview.classList.add("d-none");
+                return;
+            }
+
+            if (file.size > 10 * 1024 * 1024) {
+                alert("The image must not exceed 10 MB.");
+                event.target.value = "";
+                preview.src = "";
+                preview.classList.add("d-none");
+                return;
+            }
+
+            preview.src = URL.createObjectURL(file);
+            preview.classList.remove("d-none");
+        });
+    </script>
+}
+

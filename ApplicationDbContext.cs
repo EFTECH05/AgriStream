@@ -15,5 +15,11 @@ namespace Agristream.Data
 
         // Farm management table
         public DbSet<Farm> Farms { get; set; }
+
+        // Drone image storage table
+        public DbSet<DroneImage> DroneImages { get; set; }
+
+        // Irrigation device status table
+        public DbSet<DeviceStatus> DeviceStatuses { get; set; }
     }
 }
