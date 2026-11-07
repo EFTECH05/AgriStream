@@ -1,7 +1,16 @@
-AgriStream – Real-Time Farm Monitoring and Management System
-1. System Presentation
+# AgriStream – Real-Time Farm Monitoring and Management System
 
-1.1 Introduction
+**Cloud-Based Agricultural Monitoring Platform | ASP.NET Core MVC | Microsoft Azure**
+
+**Developer:** Franklin Ngangu Simbi  
+**Repository:** https://github.com/EFTECH05/AgriStream
+https://agristream20261106221022-fxgjb9h2emg7gkev.southafricanorth-01.azurewebsites.net/Account/Login?ReturnUrl=%2FAdmin
+---
+
+# 1. System Presentation
+<img width="1323" height="665" alt="image" src="https://github.com/user-attachments/assets/e0979fa9-1a04-4b63-8370-20ab1d434c18" />
+
+## 1.1 Introduction
 
 AgriStream is a cloud-based agricultural monitoring and management system developed to support large-scale commercial farming operations through Internet of Things (IoT) technology and Microsoft Azure cloud services.
 
@@ -9,7 +18,7 @@ The system is designed to collect, store, process, and monitor agricultural data
 
 AgriStream uses an ASP.NET Core MVC web application integrated with Azure cloud services to support reliable data storage, real-time processing, monitoring, and scalability.
 
-1.2 Problem Statement
+## 1.2 Problem Statement
 
 Large-scale farms generate substantial amounts of data from connected soil sensors and drone operations. These devices produce continuous telemetry readings and large image uploads, which can increase significantly during peak agricultural operating hours.
 
@@ -17,108 +26,339 @@ Traditional systems may struggle to process these data volumes reliably, resulti
 
 AgriStream addresses these challenges by using cloud-based infrastructure and event-driven processing to support the collection, storage, and management of agricultural information.
 
-1.3 System Objectives
+## 1.3 System Objectives
 
 The main objectives of AgriStream are to:
 
-Provide a centralised web-based platform for agricultural management.
+1. Provide a centralised web-based platform for agricultural management.
+2. Host the application using Microsoft Azure App Service.
+3. Store user accounts and farm management information in Azure SQL Database.
+4. Store drone images and other media using Azure Blob Storage.
+5. Store sensor telemetry and environmental readings using Azure Table Storage.
+6. Use Azure Functions to process uploaded images, retrieve sensor readings, and handle irrigation commands.
+7. Use Azure Queue Storage to support asynchronous irrigation command processing.
+8. Monitor application performance and resource utilisation using Azure Monitor and Application Insights.
+9. Support application scalability during periods of increased demand.
 
-Host the application using Microsoft Azure App Service.
-<img width="1301" height="725" alt="image" src="https://github.com/user-attachments/assets/6e33eb73-d715-456c-a31a-4f88534c89f8" />
-
-Store user accounts and farm management information in Azure SQL Database.
-
-Store drone images and other media using Azure Blob Storage.
-
-Store sensor telemetry and environmental readings using Azure Table Storage.
-
-Use Azure Functions to process uploaded images, retrieve sensor readings, and handle irrigation commands.
-
-Use Azure Queue Storage to support asynchronous irrigation command processing.
-
-Monitor application performance and resource utilisation using Azure Monitor and Application Insights.
-
-Support application scalability during periods of increased demand.
-
-1.4 Technologies and Services
+## 1.4 Technologies and Services
 
 The system uses the following technologies and cloud services:
 
-Technology
+| Technology | Purpose |
+|---|---|
+| ASP.NET Core MVC | Web application and user interface |
+| C# and .NET 8 | Application development |
+| Microsoft Azure App Service | Cloud application hosting |
+| Azure SQL Database | Relational data storage |
+| Azure Blob Storage | Drone image and media storage |
+| Azure Table Storage | Sensor telemetry and environmental data |
+| Azure Queue Storage | Asynchronous irrigation commands |
+| Azure Functions | Event-driven and serverless processing |
+| Azure Monitor / Application Insights | Application monitoring and diagnostics |
+| Entity Framework Core | Database access and migrations |
+| ASP.NET Core Identity | User authentication and role-based authorization |
+| GitHub | Source code management and project documentation |
 
-Purpose
+## 1.5 User Authentication and Role-Based Access Control
 
-ASP.NET Core MVC
+AgriStream implements Role-Based Access Control (RBAC) using ASP.NET Core Identity. This ensures that users can only access application features and resources permitted by their assigned roles.
 
-Web application and user interface
+The application currently uses two main roles:
 
-C# and .NET 8
+### Administrator (Admin)
 
-Application development
+The administrator has elevated privileges and is responsible for overseeing the platform and accessing administrative functionality.
 
-Microsoft Azure App Service
+Administrative pages are protected using role-based authorization.
 
-Cloud hosting
+### Standard User (User)
 
-Azure SQL Database
+A standard user represents a registered agricultural platform user who can access authorised farm monitoring and management features.
 
-Relational data storage
+Authentication is handled through a login system, while authorization restricts access to protected application pages.
 
-Azure Blob Storage
+For example, administrative functionality is protected using:
 
-Drone image and media storage
+```csharp
+[Authorize(Roles = "Admin")]
+```
 
-Azure Table Storage
+This approach separates administrative privileges from standard user access and improves application security.
 
-Sensor telemetry and environmental data
+### User Interface Evidence
 
-Azure Queue Storage
+**Admin Dashboard**
 
-Asynchronous irrigation commands
+<img width="1321" height="653" alt="image" src="https://github.com/user-attachments/assets/d3ded444-9f6b-4230-84ef-b5a76f495c16" />
 
-Azure Functions
+**Standard User Dashboard**
 
-Event-driven and serverless processing
+![AgriStream User Dashboard](docs/screenshots/04-user-dashboard.png)
 
-Azure Monitor / Application Insights
+**Role-Based Access Control**
+<img width="1353" height="686" alt="image" src="https://github.com/user-attachments/assets/9d4dd437-6a38-4d89-8dbb-9f874b355c0e" />
 
-Application monitoring and diagnostics
 
-Entity Framework Core
+## 1.6 System Overview and Architecture
 
-Database access and migrations
+The AgriStream platform consists of an ASP.NET Core MVC web application connected to Microsoft Azure cloud services.
 
-GitHub
+The MVC application provides the user-facing interface, while Azure storage services maintain different categories of agricultural data.
 
-Source code management and project documentation
+Azure Functions provide event-driven processing for drone image uploads, sensor data retrieval, and irrigation command processing.
 
-1.5 Main System Users
+Azure SQL Database stores relational application information, while Blob Storage, Table Storage, and Queue Storage support media, telemetry, and asynchronous command processing.
 
-The platform is designed around three main user roles:
+Azure monitoring services provide visibility into application performance and resource utilisation.
 
-Administrator: Manages platform users and oversees system operations.
+### System Architecture Diagram
 
-Farmer: Accesses farm information, monitors sensor readings, and views agricultural information.
+![AgriStream System Architecture](docs/agristream-architecture.png)
 
-Agronomist: Uses agricultural monitoring information to support crop and environmental analysis.
+### Deployed Application
 
-1.6 System Overview
-
-The AgriStream platform consists of a web application connected to Azure cloud services.
-
-The MVC application provides the user-facing interface, while Azure storage services maintain different categories of agricultural data. Azure Functions handle event-driven processing, and Azure monitoring services provide visibility into application performance.
-<img width="1352" height="765" alt="image" src="https://github.com/user-attachments/assets/8e52c882-c48c-4d9f-92bc-57e9f334a976" />
-
-Deployed application:
+**Application URL:**
 
 https://agristream20261106221022-fxgjb9h2emg7gkev.southafricanorth-01.azurewebsites.net/
 
-Source code:
+**GitHub Repository:**
 
 https://github.com/EFTECH05/AgriStream
 
-1.7 Development Environment
+## 1.7 Development Environment
 
-The system was developed using Visual Studio / Visual Studio Code, C#, ASP.NET Core MVC, .NET 8, Microsoft Azure, and GitHub.
+The system was developed using the following development tools and technologies:
+
+- Visual Studio / Visual Studio Code
+- C#
+- ASP.NET Core MVC
+- .NET 8
+- Microsoft Azure
+- Entity Framework Core
+- SQL Server
+- Git and GitHub
 
 The project uses a cloud-based architecture in which the web application and supporting services communicate with Azure-hosted resources.
+
+---
+
+# 2. Azure Practical Implementation
+
+This section presents the Azure services used in the AgriStream platform and provides implementation evidence for the practical requirements.
+
+## 2.1 Azure App Service – Web Application Hosting
+
+The AgriStream ASP.NET Core MVC application is deployed and hosted using Microsoft Azure App Service.
+
+Azure App Service provides the cloud hosting environment through which users can access the application.
+
+**App Service Name:** `Agristream20261106221022`
+
+**Application URL:**
+
+https://agristream20261106221022-fxgjb9h2emg7gkev.southafricanorth-01.azurewebsites.net/
+
+### Implementation Evidence
+
+<img width="1347" height="698" alt="image" src="https://github.com/user-attachments/assets/b919c3cd-5fdf-4c28-a16f-5017356356fd" />
+
+## 2.2 Azure SQL Database – Relational Database
+<img width="1356" height="701" alt="image" src="https://github.com/user-attachments/assets/53194f0b-bd22-4cff-bfde-241a12259286" />
+
+Azure SQL Database is used to store relational application information, including user accounts, roles, farm records, drone image metadata, and device status information.
+
+The MVC application connects to the database using Entity Framework Core and Azure managed identity authentication.
+
+**SQL Server:** `agristream-sql-2026.database.windows.net`
+
+**Database:** `AgriStreamDB`
+
+### Implementation Evidence
+
+<img width="1356" height="701" alt="image" src="https://github.com/user-attachments/assets/6af4ceef-1073-4b1a-b8b0-34a0c8733c13" />
+
+<img width="1351" height="592" alt="image" src="https://github.com/user-attachments/assets/d1222043-716b-4990-98c7-4e905239162b" />
+
+## 2.3 Azure Blob Storage – Drone Image Storage
+
+Azure Blob Storage provides cloud-based storage for drone images and other uploaded media files.
+<img width="1348" height="613" alt="image" src="https://github.com/user-attachments/assets/83e5d9ef-2c28-46ba-b967-8436bf9d0b55" />
+
+The AgriStream storage account contains a private container named `drone-images`.
+
+Drone image storage is intended to support the handling of large media files separately from relational application data.
+
+**Storage Account:** `agristreammedia2026`
+
+**Blob Container:** `drone-images`
+
+### Implementation Evidence
+<img width="1348" height="613" alt="image" src="https://github.com/user-attachments/assets/6b977f5f-4b21-4d78-b428-ba35dee88779" />
+
+
+## 2.4 Azure Table Storage – Sensor Telemetry
+
+Azure Table Storage is used for non-relational agricultural telemetry data, including sensor readings and environmental monitoring information.
+
+The `SensorReadings` table is designed to store sensor-related information for retrieval and processing.
+
+**Table Name:** `SensorReadings`
+
+### Implementation Evidence
+<img width="1317" height="503" alt="image" src="https://github.com/user-attachments/assets/25b3651c-320c-4370-8bbb-03bd365f4f39" />
+
+
+## 2.5 Azure Queue Storage – Irrigation Commands
+
+Azure Queue Storage supports asynchronous processing of irrigation commands.
+
+Commands submitted by the application are placed in the `irrigation-commands` queue for processing by an Azure Queue Trigger Function.
+
+This design helps separate command submission from command execution.
+
+**Queue Name:** `irrigation-commands`
+
+### Implementation Evidence
+
+![Azure Queue Storage](docs/screenshots/10-queue-storage.png)
+
+## 2.6 Azure Functions – Serverless Processing
+
+Azure Functions provide event-driven processing for the AgriStream platform.
+
+The solution is designed around four Azure Functions:
+
+### Function 1: Blob Trigger – Drone Image Processing
+
+This function detects new drone images uploaded to the `drone-images` Blob Storage container.
+
+When an image is uploaded, the function records the upload details and writes an audit entry into Azure Table Storage.
+
+### Function 2: HTTP GET – Retrieve Sensor Readings
+
+This function exposes an HTTP GET endpoint that retrieves the latest sensor readings from Azure Table Storage.
+
+The farmer dashboard can use this endpoint to retrieve agricultural telemetry information.
+
+### Function 3: HTTP POST – Submit Irrigation Commands
+
+This function receives irrigation commands through an HTTP POST request.
+
+It places the submitted command into Azure Queue Storage for asynchronous processing.
+
+### Function 4: Queue Trigger – Process Irrigation Commands
+
+This function is designed to process irrigation commands from Azure Queue Storage and update the corresponding device operational status in Azure SQL Database.
+
+### Implementation Evidence
+
+![Azure Functions](docs/screenshots/11-azure-functions.png)
+
+**Note:** Include evidence of successful deployment and execution for each function. A function that only builds successfully is not yet proof of successful cloud execution.
+
+## 2.7 Azure Monitor and Application Insights – Monitoring
+
+Azure Monitor and Application Insights are intended to provide visibility into application performance, request activity, failures, diagnostics, and resource utilisation.
+
+Monitoring is important for identifying application issues and understanding system behaviour during periods of increased traffic.
+
+### Implementation Evidence
+
+![Application Insights](docs/screenshots/12-application-insights.png)
+
+## 2.8 Azure App Service Autoscaling
+
+Autoscaling is intended to allow the AgriStream application to adjust its hosting capacity according to resource utilisation and application demand.
+
+CPU or memory utilisation can be used as scaling criteria, depending on the configured App Service Plan and supported autoscale settings.
+
+The implementation should be verified through a load test and corresponding scaling activity.
+
+### Implementation Evidence
+
+![Azure Autoscaling](docs/screenshots/13-azure-autoscaling.png)
+
+---
+
+# 3. Azure Resource Configuration
+
+The following Azure resources are used in the AgriStream implementation.
+
+| Azure Resource | Resource Name / Configuration |
+|---|---|
+| Resource Group | `RSG-RCGPON-ST10320920-SANORTH` |
+| App Service | `Agristream20261106221022` |
+| SQL Server | `agristream-sql-2026` |
+| SQL Database | `AgriStreamDB` |
+| Storage Account | `agristreammedia2026` |
+| Blob Container | `drone-images` |
+| Table Storage | `SensorReadings` |
+| Queue Storage | `irrigation-commands` |
+| Functions Project | `Agristream.Functions` |
+| Azure Region – App Service / SQL | South Africa North |
+| Azure Region – Storage | UAE North |
+
+The storage account is hosted in UAE North because the original South Africa North storage account creation attempt was blocked by the subscription storage account quota.
+
+---
+
+# 4. Source Code and Project Structure
+
+The source code is maintained in GitHub.
+
+**Repository:** https://github.com/EFTECH05/AgriStream
+
+The project contains the ASP.NET Core MVC application and a separate Azure Functions project.
+
+Main project components include:
+
+- MVC Controllers and Views
+- Application Models and Entities
+- Entity Framework Core Database Context
+- Database Migrations
+- Azure Storage Services
+- Azure Functions
+- Configuration and application startup files
+
+The Azure Functions project is maintained separately under:
+
+`Agristream.Functions/`
+
+Sensitive configuration files, including `local.settings.json` and publishing profiles, are excluded from the public Git repository.
+
+---
+
+# 5. Testing and Verification
+
+Testing is required to verify that the application and its Azure services operate correctly.
+
+The following tests are part of the AgriStream verification process:
+
+| Test Area | Verification |
+|---|---|
+| Web Application | Confirm the deployed MVC application loads successfully |
+| Database Connectivity | Verify that the MVC application connects to Azure SQL Database |
+| User Authentication | Verify login and role-based access |
+| Blob Storage | Upload a drone image and verify that it exists in Blob Storage |
+| Table Storage | Insert and retrieve sensor telemetry records |
+| HTTP GET Function | Retrieve sensor readings through the HTTP endpoint |
+| HTTP POST Function | Submit an irrigation command |
+| Queue Trigger Function | Process a queued command and update device status |
+| Blob Trigger Function | Upload an image and verify that an audit entry is created |
+| Load Testing | Simulate concurrent application requests |
+| Monitoring | Review application requests, failures, and resource utilisation |
+| Autoscaling | Verify scaling activity under increased application demand |
+
+Screenshots, test results, and execution logs should be included as evidence when available.
+
+---
+
+# 6. Conclusion
+
+AgriStream demonstrates the use of Microsoft Azure cloud services to develop an agricultural monitoring and management platform.
+
+By integrating ASP.NET Core MVC with Azure App Service, Azure SQL Database, Azure Storage services, and Azure Functions, the solution provides a foundation for managing farm information, storing agricultural data, and processing IoT-related events.
+
+The project also explores cloud monitoring, asynchronous processing, and scalability to address the challenges associated with large-scale agricultural data generation.
+
+The overall objective is to demonstrate how cloud computing and event-driven architecture can support reliable and scalable agricultural monitoring solutions.
