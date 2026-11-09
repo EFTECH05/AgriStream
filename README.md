@@ -221,12 +221,14 @@ This design helps separate command submission from command execution.
 Azure Functions provide event-driven processing for the AgriStream platform.
 
 The solution is designed around four Azure Functions:
+<img width="1365" height="231" alt="image" src="https://github.com/user-attachments/assets/5709ad4d-645d-4f0a-b17b-d34a5c8cd255" />
 
 ### Function 1: Blob Trigger – Drone Image Processing
 
 This function detects new drone images uploaded to the `drone-images` Blob Storage container.
 
 When an image is uploaded, the function records the upload details and writes an audit entry into Azure Table Storage.
+<img width="1365" height="694" alt="image" src="https://github.com/user-attachments/assets/b8f3bbe3-8baf-4131-a277-49e67b4181d6" />
 
 ### Function 2: HTTP GET – Retrieve Sensor Readings
 
@@ -235,6 +237,7 @@ This function exposes an HTTP GET endpoint that retrieves the latest sensor read
 The farmer dashboard can use this endpoint to retrieve agricultural telemetry information.
 
 ### Function 3: HTTP POST – Submit Irrigation Commands
+<img width="1327" height="601" alt="image" src="https://github.com/user-attachments/assets/03b2038e-880a-4b46-a6f7-612d136c200c" />
 
 This function receives irrigation commands through an HTTP POST request.
 
