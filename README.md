@@ -111,9 +111,7 @@ Azure SQL Database stores relational application information, while Blob Storage
 
 Azure monitoring services provide visibility into application performance and resource utilisation.
 
-### System Architecture Diagram
 
-![AgriStream System Architecture](docs/agristream-architecture.png)
 
 ### Deployed Application
 
