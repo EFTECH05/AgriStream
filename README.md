@@ -217,7 +217,7 @@ Commands submitted by the application are placed in the `irrigation-commands` qu
 This design helps separate command submission from command execution.
 <img width="1344" height="727" alt="image" src="https://github.com/user-attachments/assets/14552c62-2e95-45b3-903f-d020be2c6995" />
 
-**Queue Name:** `irrigation-commands`
+**Queue Name:** `irrigation-commands-poison`
 <img width="1360" height="722" alt="image" src="https://github.com/user-attachments/assets/875fef97-6a5b-4b6e-8231-085b864b8720" />
 
 
@@ -251,33 +251,10 @@ This function is designed to process irrigation commands from Azure Queue Storag
 
 ### Implementation Evidence
 
-![Azure Functions](docs/screenshots/11-azure-functions.png)
 
 **Note:** Include evidence of successful deployment and execution for each function. A function that only builds successfully is not yet proof of successful cloud execution.
 
-## 2.7 Azure Monitor and Application Insights – Monitoring
 
-Azure Monitor and Application Insights are intended to provide visibility into application performance, request activity, failures, diagnostics, and resource utilisation.
-
-Monitoring is important for identifying application issues and understanding system behaviour during periods of increased traffic.
-
-### Implementation Evidence
-
-![Application Insights](docs/screenshots/12-application-insights.png)
-
-## 2.8 Azure App Service Autoscaling
-
-Autoscaling is intended to allow the AgriStream application to adjust its hosting capacity according to resource utilisation and application demand.
-
-CPU or memory utilisation can be used as scaling criteria, depending on the configured App Service Plan and supported autoscale settings.
-
-The implementation should be verified through a load test and corresponding scaling activity.
-
-### Implementation Evidence
-
-![Azure Autoscaling](docs/screenshots/13-azure-autoscaling.png)
-
----
 
 # 3. Azure Resource Configuration
 
