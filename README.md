@@ -3,8 +3,7 @@
 **Cloud-Based Agricultural Monitoring Platform | ASP.NET Core MVC | Microsoft Azure**
 
 **Developer:** Franklin Ngangu Simbi  
-**Repository:** https://github.com/EFTECH05/AgriStream
-https://agristream20261106221022-fxgjb9h2emg7gkev.southafricanorth-01.azurewebsites.net/Account/Login?ReturnUrl=%2FAdmin
+WEB LINK : https://agristream20261106221022-fxgjb9h2emg7gkev.southafricanorth-01.azurewebsites.net/Account/Login?ReturnUrl=%2FAdmin
 ---
 
 # 1. System Presentation
@@ -91,9 +90,7 @@ This approach separates administrative privileges from standard user access and 
 
 <img width="1321" height="653" alt="image" src="https://github.com/user-attachments/assets/d3ded444-9f6b-4230-84ef-b5a76f495c16" />
 
-**Standard User Dashboard**
 
-![AgriStream User Dashboard](docs/screenshots/04-user-dashboard.png)
 
 **Role-Based Access Control**
 <img width="1353" height="686" alt="image" src="https://github.com/user-attachments/assets/9d4dd437-6a38-4d89-8dbb-9f874b355c0e" />
