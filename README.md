@@ -231,8 +231,41 @@ When an image is uploaded, the function records the upload details and writes an
 <img width="1365" height="694" alt="image" src="https://github.com/user-attachments/assets/b8f3bbe3-8baf-4131-a277-49e67b4181d6" />
 
 ### Function 2: HTTP GET – Retrieve Sensor Readings
+### Azure Table Storage – Permission Limitation
 
+The `SensorReadings` Azure Table was created for storing IoT sensor telemetry. The HTTP GET Azure Function was implemented and tested successfully.
+
+During testing, an attempt to insert a test sensor record using Azure CLI with `--auth-mode login` returned a `403 Forbidden` error.
+
+Investigation showed that the student account was assigned the inherited `rcgpbr_student_custom` role, and the required Azure Table Storage data permissions were not available in the permissions inspected.
+
+The required `Storage Table Data Contributor` role must be granted by the Azure administrator before test entities can be inserted using Microsoft Entra authentication.
+
+**Testing evidence:**
+- Azure Table: `SensorReadings`
+- HTTP GET endpoint: `GET /api/farms/{farmId}/readings`
+- Test response: `Count: 0`, `Readings: []`
+- Azure CLI insert attempt: `403 Forbidden`
+  
+
+**Limitation:** The GET endpoint responded successfully, but retrieving a test sensor record could not be demonstrated because the required data-plane permissions were unavailable.
 This function exposes an HTTP GET endpoint that retrieves the latest sensor readings from Azure Table Storage.
+#### HTTP GET – Retrieve Sensor Readings
+
+The HTTP GET Azure Function was tested locally using Azure Functions Core Tools.
+
+**Endpoint:**
+`GET http://localhost:7071/api/farms/1/readings`
+
+**Test result:**
+- Function host was listening on port `7071`.
+- HTTP request completed successfully.
+- Farm ID: `1`
+- Returned readings: `0`
+
+**Note:** The endpoint responded successfully, but no sensor records were returned because a test entity could not be inserted due to the Azure Table Storage permission restriction.
+
+<img width="1365" height="323" alt="image" src="https://github.com/user-attachments/assets/61006848-4197-4fd1-8ad6-d89bb1415dfa" />
 
 The farmer dashboard can use this endpoint to retrieve agricultural telemetry information.
 
