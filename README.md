@@ -334,24 +334,33 @@ Testing is required to verify that the application and its Azure services operat
 
 The following tests are part of the AgriStream verification process:
 
-| Test Area | Verification |
-|---|---|
-| Web Application | Confirm the deployed MVC application loads successfully |
-| Database Connectivity | Verify that the MVC application connects to Azure SQL Database |
-| User Authentication | Verify login and role-based access |
-| Blob Storage | Upload a drone image and verify that it exists in Blob Storage |
-| Table Storage | Insert and retrieve sensor telemetry records |
-| HTTP GET Function | Retrieve sensor readings through the HTTP endpoint |
-| HTTP POST Function | Submit an irrigation command |
-| Queue Trigger Function | Process a queued command and update device status |
-| Blob Trigger Function | Upload an image and verify that an audit entry is created |
-| Load Testing | Simulate concurrent application requests |
-| Monitoring | Review application requests, failures, and resource utilisation |
-| Autoscaling | Verify scaling activity under increased application demand |
+1. Load testing
+   <img width="1051" height="686" alt="LoadTEST1 1" src="https://github.com/user-attachments/assets/2fe165b4-ee55-40f3-91f3-6789274cc4d1" />
 
-Screenshots, test results, and execution logs should be included as evidence when available.
+---<img width="1051" height="686" alt="Screenshot 2026-11-09 160514" src="https://github.com/user-attachments/assets/37db3469-76f9-487b-be96-e5cac03cbdc8" />
 
----
+<img width="746" height="256" alt="loadTest1" src="https://github.com/user-attachments/assets/6507aee1-0c18-4e6d-81cd-138b7dd933e2" />
+4. Application Insights
+<img width="1360" height="685" alt="image" src="https://github.com/user-attachments/assets/55afa8e6-c390-4643-a71a-a111757f5390" />
+the permission error showing Microsoft.Insights registration is not authorised.
+5. App Service autoscaling
+   ### 7.2 App Service Autoscaling
+
+The AgriStream web application is deployed using the Azure App Service Plan `Retailmanagementsystem20260813213958Plan`, which currently uses the Shared D1 pricing tier.
+
+During the autoscaling configuration process, the Azure Portal displayed the following plan information:
+
+- Current pricing tier: Shared D1
+- Memory: 1 GB
+- Maximum scale: 0 instances
+- Active instance count: 0
+
+The Scale out configuration also displayed the option to view recommended pricing plans rather than providing an available autoscaling configuration.
+
+Therefore, autoscaling could not be configured using the current App Service Plan. A supported pricing tier and the necessary subscription permissions would be required to implement this feature.
+<img width="1340" height="719" alt="image" src="https://github.com/user-attachments/assets/cf0b244e-da7d-4bf3-a54c-d028ff3bfb45" />
+
+
 
 # 6. Conclusion
 
