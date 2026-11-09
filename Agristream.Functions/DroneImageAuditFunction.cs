@@ -1,7 +1,8 @@
 
-using Azure;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using Azure.Data.Tables;
-using Azure.Identity;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -19,18 +20,17 @@ namespace Agristream.Functions
         {
             _logger = logger;
 
-            string? tableServiceUri =
-                configuration["TableStorage:ServiceUri"];
+            string? connectionString =
+                configuration["TableStorage"];
 
-            if (string.IsNullOrWhiteSpace(tableServiceUri))
+            if (string.IsNullOrWhiteSpace(connectionString))
             {
                 throw new InvalidOperationException(
-                    "Table Storage ServiceUri is missing.");
+                    "Table Storage connection string is missing.");
             }
 
-            var tableServiceClient = new TableServiceClient(
-                new Uri(tableServiceUri),
-                new DefaultAzureCredential());
+            var tableServiceClient =
+                new TableServiceClient(connectionString);
 
             _tableClient = tableServiceClient.GetTableClient(
                 "DroneImageAudit");
@@ -40,7 +40,8 @@ namespace Agristream.Functions
         public async Task Run(
             [BlobTrigger(
                 "drone-images/{name}",
-                Connection = "DroneStorage")] Stream blob,
+                Connection = "DroneStorage")]
+            Stream blob,
             string name)
         {
             _logger.LogInformation(

@@ -1,6 +1,6 @@
 
+
 using Azure.Data.Tables;
-using Azure.Identity;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Configuration;
@@ -20,18 +20,17 @@ namespace Agristream.Functions
         {
             _logger = logger;
 
-            string? serviceUri =
-                configuration["TableStorage:ServiceUri"];
+            string? connectionString =
+                configuration["TableStorage"];
 
-            if (string.IsNullOrWhiteSpace(serviceUri))
+            if (string.IsNullOrWhiteSpace(connectionString))
             {
                 throw new InvalidOperationException(
-                    "Table Storage ServiceUri is missing.");
+                    "Table Storage connection string is missing.");
             }
 
-            var tableServiceClient = new TableServiceClient(
-                new Uri(serviceUri),
-                new DefaultAzureCredential());
+            var tableServiceClient =
+                new TableServiceClient(connectionString);
 
             _tableClient = tableServiceClient.GetTableClient(
                 "SensorReadings");

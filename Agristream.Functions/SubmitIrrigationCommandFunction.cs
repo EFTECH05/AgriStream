@@ -1,4 +1,4 @@
-using Azure.Identity;
+
 using Azure.Storage.Queues;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
@@ -20,20 +20,17 @@ namespace Agristream.Functions
         {
             _logger = logger;
 
-            string? queueServiceUri =
-                configuration["QueueStorage:queueServiceUri"];
+            string? connectionString =
+                configuration["QueueStorage"];
 
-            if (string.IsNullOrWhiteSpace(queueServiceUri))
+            if (string.IsNullOrWhiteSpace(connectionString))
             {
                 throw new InvalidOperationException(
-                    "Queue Storage Service URI is missing.");
+                    "Queue Storage connection string is missing.");
             }
 
-            var queueServiceClient = new QueueServiceClient(
-                new Uri(queueServiceUri),
-                new DefaultAzureCredential());
-
-            _queueClient = queueServiceClient.GetQueueClient(
+            _queueClient = new QueueClient(
+                connectionString,
                 "irrigation-commands");
         }
 
