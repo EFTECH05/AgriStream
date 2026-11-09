@@ -215,12 +215,11 @@ Azure Queue Storage supports asynchronous processing of irrigation commands.
 Commands submitted by the application are placed in the `irrigation-commands` queue for processing by an Azure Queue Trigger Function.
 
 This design helps separate command submission from command execution.
+<img width="1344" height="727" alt="image" src="https://github.com/user-attachments/assets/14552c62-2e95-45b3-903f-d020be2c6995" />
 
 **Queue Name:** `irrigation-commands`
+<img width="1360" height="722" alt="image" src="https://github.com/user-attachments/assets/875fef97-6a5b-4b6e-8231-085b864b8720" />
 
-### Implementation Evidence
-
-![Azure Queue Storage](docs/screenshots/10-queue-storage.png)
 
 ## 2.6 Azure Functions – Serverless Processing
 
@@ -344,7 +343,6 @@ The following tests are part of the AgriStream verification process:
 <img width="1360" height="685" alt="image" src="https://github.com/user-attachments/assets/55afa8e6-c390-4643-a71a-a111757f5390" />
 the permission error showing Microsoft.Insights registration is not authorised.
 5. App Service autoscaling
-   ### 7.2 App Service Autoscaling
 
 The AgriStream web application is deployed using the Azure App Service Plan `Retailmanagementsystem20260813213958Plan`, which currently uses the Shared D1 pricing tier.
 
