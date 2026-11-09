@@ -276,14 +276,7 @@ This function receives irrigation commands through an HTTP POST request.
 
 It places the submitted command into Azure Queue Storage for asynchronous processing.
 
-### Function 4: Queue Trigger – Process Irrigation Commands
 
-This function is designed to process irrigation commands from Azure Queue Storage and update the corresponding device operational status in Azure SQL Database.
-
-### Implementation Evidence
-
-
-**Note:** Include evidence of successful deployment and execution for each function. A function that only builds successfully is not yet proof of successful cloud execution.
 
 
 
